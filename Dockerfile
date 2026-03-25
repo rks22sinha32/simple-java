@@ -1,14 +1,11 @@
 # Base image
-FROM openjdk:17
+FROM eclipse-temurin:17-jdk
 
-# App के लिए folder
+# App directory
 WORKDIR /app
 
-# Jar copy
-COPY tstingproject-0.0.1-SNAPSHOT.jar app.jar
-
-# Port
-EXPOSE 8080
+# Copy jar file
+COPY target/tstingproject-0.0.1-SNAPSHOT.jar app.jar
 
 # Run app
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
