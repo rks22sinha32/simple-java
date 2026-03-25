@@ -1,34 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: student-pod
+  name: java-app
+  labels:
+    app: java-app
+
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: student-class
+      app: java-app
+
   template:
     metadata:
       labels:
-        app: student-class
+        app: java-app
+
     spec:
       containers:
-      - name: student-container
+      - name: java-container
         image: rahul9800/rahul:latest
         ports:
         - containerPort: 8080
   ---
-  apiVersion: v1
+---
+apiVersion: v1
 kind: Service
 metadata:
-  name: student-service
+  name: java-service
+
 spec:
-  type: ClusterIP   # ✅ MUST be ClusterIP for ingress
   selector:
-    app: student-class
+    app: java-app
+
   ports:
-  - port: 80
-    targetPort: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+  type: NodePort
 
 
   
