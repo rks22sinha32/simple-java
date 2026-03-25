@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-pod
+  namespace: notes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-class
+  template:
+    metadata:
+      labels:
+        app: student-class
+    spec:
+      containers:
+      - name: student-container
+        image: abhi/javatest
+        ports:
+        - containerPort: 8080
+  ---
+  apiVersion: v1
+kind: Service
+metadata:
+  name: student-service
+  namespace: notes
+spec:
+  type: ClusterIP   # ✅ MUST be ClusterIP for ingress
+  selector:
+    app: student-class
+  ports:
+  - port: 80
+    targetPort: 8080
+
+
+  
+
