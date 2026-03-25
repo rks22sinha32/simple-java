@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: student-container
-        image: abhi/javatest
+        image: rahul9800/rahul
         ports:
         - containerPort: 8080
   ---
