@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: student-pod
-  namespace: notes
 spec:
   replicas: 1
   selector:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
       - name: student-container
-        image: rahul9800/rahul
+        image: rahul9800/rahul:latest
         ports:
         - containerPort: 8080
   ---
@@ -23,7 +22,6 @@ spec:
 kind: Service
 metadata:
   name: student-service
-  namespace: notes
 spec:
   type: ClusterIP   # ✅ MUST be ClusterIP for ingress
   selector:
